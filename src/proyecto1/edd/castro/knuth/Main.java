@@ -4,9 +4,11 @@
  */
 package proyecto1.edd.castro.knuth;
 
+import Clases.Estacion;
+import Interfaces.Bienvenido;
 /**
  *
- * @author USER
+ * @author Alesia Castro
  */
 public class Main {
 
@@ -14,7 +16,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+//        Estacion estacion = new Estacion("Chacao");
+//        
+//        System.out.println(estacion);
+          Bienvenido ventana1 = new Bienvenido();
+          ventana1.setVisible(true);
     }
-    
 }
