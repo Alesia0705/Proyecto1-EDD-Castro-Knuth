@@ -4,10 +4,27 @@
  */
 package Coberturas;
 
+import Clases.Estacion;
+import EDD.Grafo;
+import EDD.ListaSimple;
 /**
  *
  * @author Alesia Castro
  */
-public class Cobertura {
+public abstract class Cobertura {
+    protected Grafo grafo;
+    protected int t;
+
+    public Cobertura(Grafo grafo, int t) {
+        this.grafo = grafo;
+        this.t = t;
+    }
+    
+    public abstract void calcularCobertura(Estacion estacionInicial);
+
+    public void marcarCoberturaDesdeSucursal(Estacion estacion, ListaSimple estacionesCubiertas) {
+       
+    }
     
 }
+
