@@ -6,12 +6,12 @@ package Interfaces;
 
 /**
  *
- * @author USER
+ * @author Moises Liota
  */
 public class Bienvenido extends javax.swing.JFrame {
 
     /**
-     * Creates new form Bienvenido
+     * Creates new form Bienvenida
      */
     public Bienvenido() {
         initComponents();
@@ -26,21 +26,53 @@ public class Bienvenido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        Titulo = new javax.swing.JLabel();
+        texto_creadores = new javax.swing.JLabel();
+        continuar = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Titulo.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        Titulo.setText("BIENVENIDOS");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
+
+        texto_creadores.setText("Creado por: Alesia y Victoria");
+        jPanel1.add(texto_creadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+
+        continuar.setText("Continuar");
+        continuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continuarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(continuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 370, -1));
+
+        salir.setText("X");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 60, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
+        CargarRed ventana2 = new CargarRed(this);
+        ventana2.setVisible(true);
+    }//GEN-LAST:event_continuarActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,6 +100,7 @@ public class Bienvenido extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Bienvenido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +111,10 @@ public class Bienvenido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JButton continuar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton salir;
+    private javax.swing.JLabel texto_creadores;
     // End of variables declaration//GEN-END:variables
 }
