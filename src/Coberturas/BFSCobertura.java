@@ -10,97 +10,119 @@ import EDD.Grafo;
 import EDD.ListaSimple;
 import javax.swing.JOptionPane;
 /**
- *
+ * Clase que implementa el algoritmo de cobertura Breadth-First Search (BFS) para un grafo de estaciones.
+ * Extiende la clase abstracta Cobertura y permite calcular la cobertura de estaciones desde una estación inicial,
+ * respetando un límite de distancia máximo t.
+ * 
  * @author Alesia Castro
  */
-public class BFSCobertura extends Cobertura{
+public class BFSCobertura extends Cobertura {
 
-    // Constructor que inicializa el grafo y el límite t para la cobertura BFS
+    /**
+     * Constructor que inicializa el grafo y el límite t para la cobertura BFS.
+     * 
+     * @param grafo El grafo que contiene las estaciones y conexiones.
+     * @param t El límite máximo de distancia para la cobertura.
+     */
     public BFSCobertura(Grafo grafo, int t) {
         super(grafo, t);
     }
 
+    /**
+     * Método que calcula la cobertura BFS desde una estación inicial, recorriendo
+     * las estaciones adyacentes hasta una distancia máxima de t.
+     * 
+     * @param estacionInicial La estación desde la cual se comienza el cálculo de cobertura.
+     */
     @Override
     public void calcularCobertura(Estacion estacionInicial) {
         if (estacionInicial == null) {
-            JOptionPane.showMessageDialog(null,  "Estación inicial no puede ser nula.");
+            JOptionPane.showMessageDialog(null, "Estación inicial no puede ser nula.");
             return;
         }
 
         String resultado = "Calculando cobertura BFS desde la estación: " + estacionInicial.getNombre();
 
-        Cola cola = new Cola();  // Usamos la clase Cola personalizada
-        ListaSimple visitadas = new ListaSimple();  // Lista de estaciones visitadas
-        Cola distancias = new Cola();  // Lista que almacena las distancias desde la estación inicial
+        Cola cola = new Cola();  // Cola personalizada para realizar el BFS
+        ListaSimple visitadas = new ListaSimple();  // Lista de estaciones ya visitadas
+        Cola distancias = new Cola();  // Cola que almacena las distancias desde la estación inicial
 
         // Encolar la estación inicial y marcarla como visitada
         cola.enColar(estacionInicial);
         visitadas.InsertarFinal(estacionInicial);
-        distancias.enColar(0);  // La estación inicial tiene distancia 0
+        distancias.enColar(0);  // La estación inicial tiene una distancia de 0
 
-        // Mientras haya estaciones en la cola
+        // Bucle para recorrer las estaciones hasta que no queden más en la cola
         while (!cola.colaVacia()) {
-            Estacion actual = (Estacion) cola.desEnColar();  // Desencolamos la estación actual
-            int distanciaActual = (int) distancias.desEnColar();  // Desencolamos la distancia correspondiente
+            Estacion actual = (Estacion) cola.desEnColar();  // Desencolar la estación actual
+            int distanciaActual = (int) distancias.desEnColar();  // Desencolar la distancia correspondiente
 
-            // Si hemos alcanzado la distancia máxima t, dejamos de explorar más allá
+            // Si hemos alcanzado o excedido la distancia máxima t, dejar de explorar esta rama
             if (distanciaActual > t) {
                 continue;
             }
 
             resultado += "Estación actual: " + actual.getNombre() + " (Distancia: " + distanciaActual + ")" + "\n";
 
-            // Obtener las estaciones adyacentes
+            // Obtener las estaciones adyacentes de la estación actual
             ListaSimple adyacentes = actual.getListaAd();
             for (int i = 0; i < adyacentes.getSize(); i++) {
                 Estacion adyacente = (Estacion) adyacentes.getValor(i);
 
-                // Si la estación adyacente no ha sido visitada, la encolamos
+                // Si la estación adyacente no ha sido visitada, se encola
                 if (!visitadas.buscar(adyacente)) {
-                    cola.enColar(adyacente);  // Encolamos la estación adyacente
-                    visitadas.InsertarFinal(adyacente);  // Marcamos como visitada
-                    distancias.enColar(distanciaActual + 1);  // Aumentamos la distancia
+                    cola.enColar(adyacente);  // Encolar la estación adyacente
+                    visitadas.InsertarFinal(adyacente);  // Marcar como visitada
+                    distancias.enColar(distanciaActual + 1);  // Aumentar la distancia
                 }
             }
         }
 
         resultado += "Cobertura BFS completada hasta una distancia de " + t + " paradas.";
         JOptionPane.showMessageDialog(null, resultado);
-        
     }
-    
+
+    /**
+     * Método que marca las estaciones cubiertas desde una estación inicial hasta un máximo de t paradas,
+     * añadiendo las estaciones cubiertas a la lista proporcionada.
+     * 
+     * @param estacionInicial La estación desde donde se empieza a marcar la cobertura.
+     * @param estacionesCubiertas Una lista de estaciones que serán marcadas como cubiertas.
+     */
     public void marcarCoberturaDesdeSucursal(Estacion estacionInicial, ListaSimple estacionesCubiertas) {
         if (estacionInicial == null) {
             return;
         }
 
-        Cola cola = new Cola();
-        Cola distancias = new Cola();
+        Cola cola = new Cola();  // Cola para el BFS
+        Cola distancias = new Cola();  // Cola que almacena las distancias
 
         cola.enColar(estacionInicial);
         estacionesCubiertas.InsertarFinal(estacionInicial);  // Marcar la estación inicial como cubierta
-        distancias.enColar(0);
+        distancias.enColar(0);  // Distancia inicial es 0
 
+        // Bucle para recorrer las estaciones
         while (!cola.colaVacia()) {
             Estacion actual = (Estacion) cola.desEnColar();
             int distanciaActual = (int) distancias.desEnColar();
 
+            // Detener la exploración si se alcanza el límite de distancia
             if (distanciaActual >= t) {
                 continue;
             }
 
+            // Obtener estaciones adyacentes de la estación actual
             ListaSimple adyacentes = actual.getListaAd();
             for (int i = 0; i < adyacentes.getSize(); i++) {
                 Estacion adyacente = (Estacion) adyacentes.getValor(i);
 
-                // Si la estación adyacente no ha sido cubierta, la marcamos
+                // Si la estación adyacente no ha sido marcada como cubierta, la encolamos
                 if (!estacionesCubiertas.buscar(adyacente)) {
                     cola.enColar(adyacente);
                     estacionesCubiertas.InsertarFinal(adyacente);  // Marcar la estación como cubierta
-                    distancias.enColar(distanciaActual + 1);
+                    distancias.enColar(distanciaActual + 1);  // Aumentar la distancia
                 }
             }
         }
     }
-    
 }

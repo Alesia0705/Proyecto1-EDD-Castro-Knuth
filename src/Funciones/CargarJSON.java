@@ -15,30 +15,61 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- *
+ * Clase que se encarga de procesar un archivo JSON que contiene una red de transporte,
+ * creando los objetos de tipo Estacion y Linea correspondientes.
+ * Esta clase permite cargar la información de un archivo JSON y representarla en listas
+ * de estaciones y líneas.
+ * 
  * @author Victoria Knuth
  */
 public class CargarJSON {
-     private ListaSimple estaciones = new ListaSimple(); // Lista de estaciones
-    private ListaSimple lineas = new ListaSimple(); // Lista de líneas
 
+    private ListaSimple estaciones = new ListaSimple(); // Lista de estaciones
+    private ListaSimple lineas = new ListaSimple();     // Lista de líneas
+
+    /**
+     * Obtiene la lista de estaciones procesadas desde el archivo JSON.
+     * 
+     * @return La lista de estaciones.
+     */
     public ListaSimple getEstaciones() {
         return estaciones;
     }
 
+    /**
+     * Establece la lista de estaciones.
+     * 
+     * @param estaciones La nueva lista de estaciones.
+     */
     public void setEstaciones(ListaSimple estaciones) {
         this.estaciones = estaciones;
     }
 
+    /**
+     * Obtiene la lista de líneas procesadas desde el archivo JSON.
+     * 
+     * @return La lista de líneas.
+     */
     public ListaSimple getLineas() {
         return lineas;
     }
 
+    /**
+     * Establece la lista de líneas.
+     * 
+     * @param lineas La nueva lista de líneas.
+     */
     public void setLineas(ListaSimple lineas) {
         this.lineas = lineas;
     }
 
-    // Función que procesa el archivo JSON y crea los objetos de tipo Estacion y Linea
+    /**
+     * Procesa un archivo JSON que contiene información sobre redes de transporte, creando
+     * las estaciones y líneas correspondientes. 
+     * Cada red de transporte en el archivo JSON se puede organizar como un objeto o un array.
+     * 
+     * @param rutaArchivo La ruta del archivo JSON a procesar.
+     */
     public void procesarRedTransporteJSON(String rutaArchivo) {
         try {
             // Leer el archivo JSON usando Gson
@@ -53,7 +84,7 @@ public class CargarJSON {
                 String nombreRed = (String) nombresRedes.getValor(i);
                 JsonElement redElement = redTransporteData.get(nombreRed);
 
-                // Verificamos si es un objeto o un arreglo y lo manejamos adecuadamente
+                // Verificar si es un objeto o un array y procesarlo
                 if (redElement.isJsonObject()) {
                     JsonObject lineasObject = redElement.getAsJsonObject();
                     procesarLineas(lineasObject);
@@ -73,7 +104,12 @@ public class CargarJSON {
         }
     }
 
-    // Método auxiliar para obtener las claves de un JsonObject como ListaSimple
+    /**
+     * Método auxiliar que obtiene las claves de un JsonObject y las devuelve como una ListaSimple.
+     * 
+     * @param jsonObject El objeto JSON del cual se obtendrán las claves.
+     * @return Una ListaSimple que contiene las claves del JsonObject.
+     */
     private ListaSimple obtenerClavesDeJsonObject(JsonObject jsonObject) {
         ListaSimple listaClaves = new ListaSimple();
         for (String key : jsonObject.keySet()) {
@@ -82,7 +118,12 @@ public class CargarJSON {
         return listaClaves;
     }
 
-    // Método auxiliar para procesar las líneas y estaciones
+    /**
+     * Método que procesa las líneas de un objeto JSON y crea las estaciones adyacentes y peatonales.
+     * También asigna las estaciones procesadas a las líneas correspondientes.
+     * 
+     * @param lineasObject El objeto JSON que contiene las líneas y sus estaciones.
+     */
     private void procesarLineas(JsonObject lineasObject) {
         // Obtener las claves de las líneas
         ListaSimple nombresLineas = obtenerClavesDeJsonObject(lineasObject);
@@ -114,7 +155,7 @@ public class CargarJSON {
                     estacionAnterior = estacionActual;
 
                 } else if (estacionElement.isJsonObject()) {
-                    // Caso de una conexión peatonal (ejemplo: {"Capitolio":"El Silencio"})
+                    // Caso de una conexión peatonal
                     JsonObject conexionPeatonal = estacionElement.getAsJsonObject();
                     ListaSimple clavesPeatonales = obtenerClavesDeJsonObject(conexionPeatonal);
 
@@ -148,7 +189,12 @@ public class CargarJSON {
         }
     }
 
-    // Método auxiliar para obtener una estación existente o crear una nueva
+    /**
+     * Método auxiliar que busca una estación existente en la lista o crea una nueva si no existe.
+     * 
+     * @param nombreEstacion El nombre de la estación que se desea buscar o crear.
+     * @return La estación existente o una nueva estación si no fue encontrada.
+     */
     private Estacion obtenerOcrearEstacion(String nombreEstacion) {
         // Buscar si la estación ya fue creada en la lista de estaciones
         for (int i = 0; i < estaciones.getSize(); i++) {
@@ -157,7 +203,7 @@ public class CargarJSON {
                 return estacion;
             }
         }
-        // Si no existe, la creamos y la añadimos a la lista de estaciones
+        // Si no existe, crear una nueva estación y añadirla a la lista
         Estacion nuevaEstacion = new Estacion(nombreEstacion);
         estaciones.InsertarFinal(nuevaEstacion);
         return nuevaEstacion;

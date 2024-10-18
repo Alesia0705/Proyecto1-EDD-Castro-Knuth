@@ -114,7 +114,7 @@ public class CargarRed extends javax.swing.JFrame {
             File fichero = fc.getSelectedFile();
 
             // Escribo la ruta del fichero en un JTextField (si lo tienes)
-            Ruta_Fichero.setText(fichero.getAbsolutePath()); // Aquí debes usar el JTextField que tienes en el JFrame para mostrar la ruta del archivo
+            Ruta_Fichero2.setText(fichero.getAbsolutePath()); // Aquí debes usar el JTextField que tienes en el JFrame para mostrar la ruta del archivo
             try (FileReader fr = new FileReader(fichero)) {
                 StringBuilder cadena = new StringBuilder();
                 int valor = fr.read();
@@ -141,9 +141,12 @@ public class CargarRed extends javax.swing.JFrame {
     private void cargarRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRedActionPerformed
         if (!Archivo_Cargado.getText().trim().isEmpty()) {
             CargarJSON cargar = new CargarJSON();
-            cargar.procesarRedTransporteJSON(Ruta_Fichero.getText());
+            cargar.procesarRedTransporteJSON(Ruta_Fichero2.getText());
             grafoGestion.inicializar(cargar.getEstaciones());
             
+            Menu menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
 
         } else {
             JOptionPane.showMessageDialog(this, "Archivo Vacio");
