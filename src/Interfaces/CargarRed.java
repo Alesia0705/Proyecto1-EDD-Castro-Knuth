@@ -15,7 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Moises Liota
+ * @author Victoria Knuth
  */
 public class CargarRed extends javax.swing.JFrame {
 

@@ -6,7 +6,7 @@ package Gestion;
 
 /**
  *
- * @author USER
+ * @author Victoria Knuth
  */
 public class GestionSucursales {
     

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USER
+ * @author Victoria Knuth
  */
 public class GestionGrafo {
     private Grafo grafo;

@@ -6,7 +6,7 @@ package Interfaces;
 
 /**
  *
- * @author Moises Liota
+ * @author Victoria Knuth
  */
 public class Bienvenido extends javax.swing.JFrame {
 
