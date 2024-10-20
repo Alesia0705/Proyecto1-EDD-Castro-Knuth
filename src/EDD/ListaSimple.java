@@ -7,49 +7,82 @@ package EDD;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que implementa una lista enlazada simple, donde cada nodo apunta al siguiente.
+ * Proporciona operaciones para insertar, eliminar, buscar, editar y consultar nodos en la lista.
+ * 
+ * La lista permite almacenar cualquier tipo de objeto y gestiona la memoria de forma dinámica.
+ * 
  * @author Alesia Castro
  */
 public class ListaSimple {
 
-    private Nodo pFirst; //nodo apuntador al primero
-    private int size; //tamaño de la lista
+    private Nodo pFirst; // Nodo que apunta al primer elemento de la lista
+    private int size;    // Tamaño de la lista
 
-    //Constructor de la clase Lista
+    /**
+     * Constructor que inicializa una lista vacía.
+     */
     public ListaSimple() {
         this.pFirst = null;
         this.size = 0;
     }
 
-    //Metodos get y set para los atrubutos
+    /**
+     * Devuelve el nodo que es el primer elemento de la lista.
+     * 
+     * @return El primer nodo de la lista.
+     */
     public Nodo getpFirst() {
         return pFirst;
     }
 
+    /**
+     * Establece el primer nodo de la lista.
+     * 
+     * @param pFirst El nuevo primer nodo de la lista.
+     */
     public void setpFirst(Nodo pFirst) {
         this.pFirst = pFirst;
     }
 
+    /**
+     * Devuelve el tamaño actual de la lista.
+     * 
+     * @return El tamaño de la lista.
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Establece el tamaño de la lista.
+     * 
+     * @param size El nuevo tamaño de la lista.
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
-    //Primitivas
-    //Funcion para verificar si la lista es vacia
+    /**
+     * Verifica si la lista está vacía.
+     * 
+     * @return {@code true} si la lista no contiene elementos, {@code false} en caso contrario.
+     */
     public boolean EsVacio() {
         return this.pFirst == null;
     }
 
+    /**
+     * Inserta un nuevo elemento al inicio de la lista.
+     * 
+     * @param dato El dato que se va a insertar.
+     */
     public void InsertarInicio(Object dato) {
         Nodo pNew = new Nodo();
         pNew.setDato(dato);
 
         if (EsVacio()) {
-            this.pFirst.setDato(dato);
+            this.pFirst = pNew;
             this.pFirst.setPnext(null);
         } else {
             pNew.setPnext(pFirst);
@@ -58,7 +91,11 @@ public class ListaSimple {
         size++;
     }
 
-    //Metodo para insertar al final
+    /**
+     * Inserta un nuevo elemento al final de la lista.
+     * 
+     * @param dato El dato que se va a insertar.
+     */
     public void InsertarFinal(Object dato) {
         Nodo pNew = new Nodo(dato);
         if (EsVacio()) {
@@ -73,6 +110,12 @@ public class ListaSimple {
         size++;
     }
 
+    /**
+     * Inserta un nuevo elemento en una posición específica de la lista.
+     * 
+     * @param posicion La posición en la cual insertar el nuevo elemento.
+     * @param valor El valor del nuevo elemento.
+     */
     public void insertarPorPosicion(int posicion, Object valor) {
         if (posicion >= 0 && posicion < size) {
             Nodo nuevo = new Nodo(valor);
@@ -80,109 +123,114 @@ public class ListaSimple {
                 nuevo.setPnext(pFirst);
                 pFirst = nuevo;
             } else {
-                if (posicion == size - 1) {
-                    Nodo aux = pFirst;
-                    while (aux.getPnext() != null) {
-                        aux = aux.getPnext();
-                    }
-                    aux.setPnext(nuevo);
-                } else {
-                    Nodo aux = pFirst;
-                    for (int i = 0; i < (posicion - 1); i++) {
-                        aux = aux.getPnext();
-                    }
-                    Nodo siguiente = aux.getPnext();
-                    aux.setPnext(nuevo);
-                    nuevo.setPnext(siguiente);
+                Nodo aux = pFirst;
+                for (int i = 0; i < posicion - 1; i++) {
+                    aux = aux.getPnext();
                 }
+                Nodo siguiente = aux.getPnext();
+                aux.setPnext(nuevo);
+                nuevo.setPnext(siguiente);
             }
             size++;
         }
     }
 
-    //Metodo para Insertar por referencia
+    /**
+     * Inserta un nuevo elemento después de un nodo de referencia.
+     * 
+     * @param ref El nodo de referencia.
+     * @param valor El valor del nuevo nodo a insertar.
+     */
     public void insertarPorReferencia(Object ref, Object valor) {
-
         Nodo nuevo = new Nodo();
         nuevo.setDato(valor);
 
-        if (!EsVacio()) {
-            if (buscar(ref)) {
-                Nodo aux = pFirst;
-                // Recorre la lista hasta llegar al nodo de referencia.
-                while (aux.getDato() != ref) {
-                    aux = aux.getPnext();
-                }
-                // Crea un respaldo de la continuación de la lista.
-                Nodo siguiente = aux.getPnext();
-                // Enlaza el nuevo nodo después del nodo de referencia.
-                aux.setPnext(nuevo);
-                // Une la continuación de la lista al nuevo nodo.
-                nuevo.setPnext(siguiente);
-
-                size++;
+        if (!EsVacio() && buscar(ref)) {
+            Nodo aux = pFirst;
+            while (aux.getDato() != ref) {
+                aux = aux.getPnext();
             }
+            Nodo siguiente = aux.getPnext();
+            aux.setPnext(nuevo);
+            nuevo.setPnext(siguiente);
+            size++;
         }
     }
 
+    /**
+     * Transforma la lista en una representación de cadena de texto.
+     * 
+     * @return Una cadena que representa los elementos de la lista.
+     */
     public String Transformar() {
         if (!EsVacio()) {
             Nodo aux = pFirst;
             StringBuilder expresion = new StringBuilder();
             for (int i = 0; i < size; i++) {
-                // Aquí deberías evitar la recursión infinita, mostrando solo lo necesario
                 expresion.append(aux.getDato().toString()).append("\n");
                 aux = aux.getPnext();
             }
             return expresion.toString();
         }
-        return "Lista vacia";
+        return "Lista vacía";
     }
 
+    /**
+     * Muestra los elementos de la lista en un cuadro de diálogo y en la consola.
+     */
     public void mostrar() {
         if (!EsVacio()) {
             Nodo aux = pFirst;
-            String expresion = "";
+            StringBuilder expresion = new StringBuilder();
             while (aux != null) {
-                expresion = expresion + aux.getDato().toString() + "\n";
+                expresion.append(aux.getDato().toString()).append("\n");
                 aux = aux.getPnext();
             }
-            JOptionPane.showMessageDialog(null, expresion);
+            JOptionPane.showMessageDialog(null, expresion.toString());
             System.out.println(expresion);
-
         } else {
-            JOptionPane.showMessageDialog(null, "La lista esta vacia");
+            JOptionPane.showMessageDialog(null, "La lista está vacía");
         }
     }
 
-    //Funcion para eliminar al inicio
+    /**
+     * Elimina el primer elemento de la lista.
+     * 
+     * @return {@code true} si se eliminó correctamente, {@code false} si la lista está vacía.
+     */
     public boolean Eliminar_Inicio() {
         if (!EsVacio()) {
             pFirst = pFirst.getPnext();
             size--;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
+    /**
+     * Elimina el último elemento de la lista.
+     */
     public void Eliminar_Final() {
         if (!EsVacio()) {
-            if (getSize() == 1) {
+            if (size == 1) {
                 eliminar();
             } else {
-                Nodo pointer = getpFirst();
-                while (pointer.getPnext() != null && pointer.getPnext().getPnext() != null) {
-                    pointer = pointer.getPnext();
+                Nodo aux = pFirst;
+                while (aux.getPnext().getPnext() != null) {
+                    aux = aux.getPnext();
                 }
-                pointer.setPnext(null);
+                aux.setPnext(null);
+                size--;
             }
-            size--;
         }
     }
 
+    /**
+     * Elimina un nodo por referencia a su valor.
+     * 
+     * @param referencia El valor del nodo a eliminar.
+     */
     public void EliminarPorReferencia(Object referencia) {
-
         if (buscar(referencia)) {
             if (pFirst.getDato() == referencia) {
                 pFirst = pFirst.getPnext();
@@ -198,8 +246,12 @@ public class ListaSimple {
         }
     }
 
+    /**
+     * Elimina un nodo en una posición específica.
+     * 
+     * @param posicion La posición del nodo a eliminar.
+     */
     public void EliminarPorPosicion(int posicion) {
-
         if (posicion >= 0 && posicion < size) {
             if (posicion == 0) {
                 pFirst = pFirst.getPnext();
@@ -208,13 +260,18 @@ public class ListaSimple {
                 for (int i = 0; i < posicion - 1; i++) {
                     aux = aux.getPnext();
                 }
-                Nodo siguiente = aux.getPnext();
-                aux.setPnext(siguiente.getPnext());
+                aux.setPnext(aux.getPnext().getPnext());
             }
             size--;
         }
     }
 
+    /**
+     * Edita el valor de un nodo que tiene una referencia específica.
+     * 
+     * @param referencia La referencia del nodo a editar.
+     * @param dato El nuevo valor del nodo.
+     */
     public void editarPorReferencia(Object referencia, Object dato) {
         if (buscar(referencia)) {
             Nodo aux = pFirst;
@@ -225,82 +282,85 @@ public class ListaSimple {
         }
     }
 
-    //Metodo para editar el valor de un nodo en una posición
+    /**
+     * Edita el valor de un nodo en una posición específica.
+     * 
+     * @param posicion La posición del nodo a editar.
+     * @param dato El nuevo valor del nodo.
+     */
     public void editarPorPosicion(int posicion, Object dato) {
-
         if (posicion >= 0 && posicion < size) {
-            if (posicion == 0) {
-                pFirst.setDato(dato);
-            } else {
-                Nodo aux = pFirst;
-
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getPnext();
-                }
-                aux.setDato(dato);
+            Nodo aux = pFirst;
+            for (int i = 0; i < posicion; i++) {
+                aux = aux.getPnext();
             }
+            aux.setDato(dato);
         }
     }
 
-    //Metodo para obtener el valor de un nodo en una determinada posición
+    /**
+     * Obtiene el valor de un nodo en una posición específica.
+     * 
+     * @param posicion La posición del nodo.
+     * @return El valor del nodo o {@code null} si la posición es inválida.
+     */
     public Object getValor(int posicion) {
-
         if (posicion >= 0 && posicion < size) {
-
-            if (posicion == 0) {
-                return pFirst.getDato();
-            } else {
-                Nodo aux = pFirst;
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getPnext();
-                }
-                return aux.getDato();
+            Nodo aux = pFirst;
+            for (int i = 0; i < posicion; i++) {
+                aux = aux.getPnext();
             }
+            return aux.getDato();
         }
         return null;
     }
 
-    //Metodo para obtener un nodo en una determinada posición
+    /**
+     * Obtiene el nodo en una posición específica.
+     * 
+     * @param posicion La posición del nodo.
+     * @return El nodo o {@code null} si la posición es inválida.
+     */
     public Nodo getNodo(int posicion) {
-
         if (posicion >= 0 && posicion < size) {
-
-            if (posicion == 0) {
-                return pFirst;
-            } else {
-                Nodo aux = pFirst;
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getPnext();
-                }
-                return aux;
+            Nodo aux = pFirst;
+            for (int i = 0; i < posicion; i++) {
+                aux = aux.getPnext();
             }
+            return aux;
         }
         return null;
     }
 
-    //Metodo para retornar la posición de un nodo
+    /**
+     * Obtiene la posición de un nodo en la lista.
+     * 
+     * @param nodito El nodo cuya posición se desea obtener.
+     * @return La posición del nodo o {@code -1} si no se encuentra en la lista.
+     */
     public int getIndex(Nodo nodito) {
         if (!EsVacio()) {
             Nodo aux = pFirst;
             int count = 0;
             while (aux != null) {
-
                 if (nodito == aux) {
-                    return count;     //posición en memoria del nodo
+                    return count;
                 }
                 count++;
                 aux = aux.getPnext();
             }
-            return -1;
         }
         return -1;
     }
 
-    //Consulta la posición de un elemento en la lista
+    /**
+     * Obtiene la posición de un elemento en la lista según su valor.
+     * 
+     * @param referencia El valor del nodo a buscar.
+     * @return La posición del nodo o {@code -1} si no se encuentra.
+     */
     public int getPosicion(Object referencia) {
-
         if (buscar(referencia)) {
-
             Nodo aux = pFirst;
             int cont = 0;
             while (referencia != aux.getDato()) {
@@ -308,29 +368,32 @@ public class ListaSimple {
                 aux = aux.getPnext();
             }
             return cont;
-        } else {
-            return -1;
         }
+        return -1;
     }
 
-    // Funcion para buscar un elemento en la lista
+    /**
+     * Busca un nodo en la lista por su valor.
+     * 
+     * @param referencia El valor del nodo a buscar.
+     * @return {@code true} si se encuentra el nodo, {@code false} en caso contrario.
+     */
     public boolean buscar(Object referencia) {
         Nodo aux = pFirst;
-        boolean encontrado = false;
-        while (aux != null && encontrado != true) {
+        while (aux != null) {
             if (referencia == aux.getDato()) {
-                encontrado = true;
-            } else {
-                aux = aux.getPnext();
+                return true;
             }
+            aux = aux.getPnext();
         }
-        return encontrado;
+        return false;
     }
 
-    //Destructor
+    /**
+     * Elimina todos los elementos de la lista, dejándola vacía.
+     */
     public void eliminar() {
         pFirst = null;
         size = 0;
     }
 }
-

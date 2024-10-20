@@ -9,18 +9,36 @@ import EDD.Grafo;
 import EDD.ListaSimple;
 import javax.swing.JOptionPane;
 /**
+ * Clase que implementa el algoritmo de búsqueda en profundidad (DFS) para calcular la cobertura en un grafo de estaciones.
+ * Extiende la clase `Cobertura` y utiliza un enfoque recursivo para explorar el grafo, almacenando el resultado de la búsqueda en un StringBuilder.
  *
  * @author Alesia Castro
  */
-public class DFSCobertura extends Cobertura{
+public class DFSCobertura extends Cobertura {
 
-    private StringBuilder resultado; // Para almacenar la cobertura que se va calculando
+    /**
+     * StringBuilder utilizado para almacenar el resultado de la búsqueda en profundidad,
+     * concatenando las estaciones visitadas y sus respectivas distancias.
+     */
+    private StringBuilder resultado;
 
+    /**
+     * Constructor que inicializa el grafo, el límite de distancia y crea un StringBuilder para almacenar el resultado.
+     *
+     * @param grafo El grafo de estaciones.
+     * @param t El límite máximo de distancia a considerar en la búsqueda.
+     */
     public DFSCobertura(Grafo grafo, int t) {
         super(grafo, t);
-        resultado = new StringBuilder(); // Inicializamos el StringBuilder
+        resultado = new StringBuilder();
     }
 
+    /**
+     * Calcula la cobertura utilizando una búsqueda en profundidad (DFS) a partir de una estación inicial.
+     * Marca las estaciones visitadas y acumula el resultado en el StringBuilder `resultado`.
+     *
+     * @param estacionInicial La estación desde donde se inicia la búsqueda DFS.
+     */
     @Override
     public void calcularCobertura(Estacion estacionInicial) {
         if (estacionInicial == null) {

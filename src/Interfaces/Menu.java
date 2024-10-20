@@ -121,9 +121,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_colocarSucursalActionPerformed
 
     private void coberturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coberturasActionPerformed
-//        Coberturas ventana5 = new Coberturas(this);
-//        this.setVisible(false);
-//        ventana5.setVisible(true);
+        Coberturas ventana5 = new Coberturas(this);
+        this.setVisible(false);
+        ventana5.setVisible(true);
     }//GEN-LAST:event_coberturasActionPerformed
 
     private void AgregarLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarLineasActionPerformed
