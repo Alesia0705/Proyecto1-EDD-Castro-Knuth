@@ -52,13 +52,16 @@ public class CargarRed extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Titulo2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        Titulo2.setFont(new java.awt.Font("Bookman Old Style", 1, 34)); // NOI18N
         Titulo2.setText("Cargar Red de Transporte");
-        jPanel3.add(Titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+        jPanel3.add(Titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
         jPanel3.add(Ruta_Fichero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 350, -1));
 
+        buscarRuta2.setBackground(new java.awt.Color(0, 204, 204));
+        buscarRuta2.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         buscarRuta2.setText("Buscar Archivo");
         buscarRuta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +76,8 @@ public class CargarRed extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 350, 250));
 
+        cargarRed.setBackground(new java.awt.Color(0, 204, 204));
+        cargarRed.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         cargarRed.setText("Cargar Red");
         cargarRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,13 +86,15 @@ public class CargarRed extends javax.swing.JFrame {
         });
         jPanel3.add(cargarRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 350, -1));
 
+        salir.setBackground(new java.awt.Color(255, 0, 0));
+        salir.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
         salir.setText("X");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
-        jPanel3.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 50, 40));
+        jPanel3.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 50, 40));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 430));
 
@@ -194,18 +201,10 @@ public class CargarRed extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Archivo_Cargado;
-    private javax.swing.JTextField Ruta_Fichero;
-    private javax.swing.JTextField Ruta_Fichero1;
     private javax.swing.JTextField Ruta_Fichero2;
-    private javax.swing.JLabel Titulo;
-    private javax.swing.JLabel Titulo1;
     private javax.swing.JLabel Titulo2;
-    private javax.swing.JButton buscarRuta;
-    private javax.swing.JButton buscarRuta1;
     private javax.swing.JButton buscarRuta2;
     private javax.swing.JButton cargarRed;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton salir;

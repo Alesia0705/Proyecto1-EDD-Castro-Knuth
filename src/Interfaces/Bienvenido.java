@@ -38,23 +38,29 @@ public class Bienvenido extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Titulo.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        Titulo.setFont(new java.awt.Font("Bookman Old Style", 1, 36)); // NOI18N
         Titulo.setText("BIENVENIDOS");
-        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
+        texto_creadores.setFont(new java.awt.Font("Bookman Old Style", 3, 13)); // NOI18N
         texto_creadores.setText("Creado por: Alesia y Victoria");
-        jPanel1.add(texto_creadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+        jPanel1.add(texto_creadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
+        continuar.setBackground(new java.awt.Color(0, 204, 204));
+        continuar.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         continuar.setText("Continuar");
         continuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continuarActionPerformed(evt);
             }
         });
-        jPanel1.add(continuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 370, -1));
+        jPanel1.add(continuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 370, -1));
 
+        salir.setBackground(new java.awt.Color(255, 0, 0));
+        salir.setFont(new java.awt.Font("Bookman Old Style", 1, 18)); // NOI18N
         salir.setText("X");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -59,14 +59,16 @@ public class Coberturas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bookman Old Style", 1, 36)); // NOI18N
         jLabel1.setText("COBERTURAS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
 
-        jLabel2.setText("Verificar Cobertura de una Ciudad:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
+        jLabel2.setText("Verificar Cobertura de una Ciudad");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
 
         estacionInicio.setModel(modeloCombo);
         estacionInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +78,8 @@ public class Coberturas extends javax.swing.JFrame {
         });
         jPanel1.add(estacionInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 210, -1));
 
+        verificarCobertura.setBackground(new java.awt.Color(0, 204, 204));
+        verificarCobertura.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         verificarCobertura.setText("Verificar Cobertura");
         verificarCobertura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,24 +88,29 @@ public class Coberturas extends javax.swing.JFrame {
         });
         jPanel1.add(verificarCobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 210, -1));
 
+        jLabel3.setFont(new java.awt.Font("Bookman Old Style", 1, 13)); // NOI18N
         jLabel3.setText("Ciudad de Inicio");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
         jLabel4.setText("Elegir Tipo de Recorridos");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
 
+        tipoCobertura.setFont(new java.awt.Font("Bookman Old Style", 1, 13)); // NOI18N
         tipoCobertura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DFS", "BFS" }));
         jPanel1.add(tipoCobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 210, -1));
 
+        volver.setBackground(new java.awt.Color(0, 204, 204));
+        volver.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
-        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 450, -1, -1));
+        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 490));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

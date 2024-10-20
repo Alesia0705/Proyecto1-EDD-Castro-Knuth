@@ -110,14 +110,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarGrafoActionPerformed
 
     private void establecerTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_establecerTActionPerformed
-//        ModificarT ventana4 = new ModificarT(this);
-//        this.setVisible(false);
-//        ventana4.setVisible(true);
+        ModificarT ventana4 = new ModificarT(this);
+        this.setVisible(false);
+        ventana4.setVisible(true);
     }//GEN-LAST:event_establecerTActionPerformed
 
     private void colocarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colocarSucursalActionPerformed
-//        Sucursales ventana6 = new Sucursales(this);
-//        this.setVisible(false);
+        Sucursales ventana6 = new Sucursales(this);
+        this.setVisible(false);
     }//GEN-LAST:event_colocarSucursalActionPerformed
 
     private void coberturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coberturasActionPerformed
@@ -127,9 +127,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_coberturasActionPerformed
 
     private void AgregarLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarLineasActionPerformed
-//        AgregarLineas ventana7 = new AgregarLineas(this);
-//        ventana7.setVisible(true);
-//        this.setVisible(false);
+        AgregarLineas ventana7 = new AgregarLineas(this);
+        ventana7.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_AgregarLineasActionPerformed
 
     private void cargarRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRedActionPerformed

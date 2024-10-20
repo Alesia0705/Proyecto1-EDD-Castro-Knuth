@@ -78,6 +78,8 @@ public class AgregarLineas extends javax.swing.JFrame {
         volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputNewEstacion.addActionListener(new java.awt.event.ActionListener() {
@@ -87,19 +89,23 @@ public class AgregarLineas extends javax.swing.JFrame {
         });
         getContentPane().add(inputNewEstacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 280, -1));
 
-        AgregarLinea.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        AgregarLinea.setText("Agregar Linea");
+        AgregarLinea.setBackground(new java.awt.Color(255, 255, 255));
+        AgregarLinea.setFont(new java.awt.Font("Bookman Old Style", 1, 36)); // NOI18N
+        AgregarLinea.setText("Agregar Línea");
         getContentPane().add(AgregarLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 280, 60));
 
-        agregarEstacion.setText("Agregar Estacion");
+        agregarEstacion.setBackground(new java.awt.Color(0, 255, 204));
+        agregarEstacion.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        agregarEstacion.setText("Agregar Estación");
         agregarEstacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarEstacionActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarEstacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 140, -1));
+        getContentPane().add(agregarEstacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 160, -1));
 
-        jLabel1.setText("Nombre de la Estacion");
+        jLabel1.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
+        jLabel1.setText("Nombre de la Estación");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         ciudadInicio.setModel(modeloCombo);
@@ -113,21 +119,25 @@ public class AgregarLineas extends javax.swing.JFrame {
         ciudadLlegada.setModel(modeloCombo2);
         getContentPane().add(ciudadLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 280, -1));
 
+        agregarAdy.setBackground(new java.awt.Color(153, 255, 204));
+        agregarAdy.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         agregarAdy.setText("Agregar Adyacencia");
         agregarAdy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarAdyActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarAdy, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 140, -1));
+        getContentPane().add(agregarAdy, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 160, -1));
 
+        volver.setBackground(new java.awt.Color(0, 204, 204));
+        volver.setFont(new java.awt.Font("Bookman Old Style", 1, 12)); // NOI18N
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
