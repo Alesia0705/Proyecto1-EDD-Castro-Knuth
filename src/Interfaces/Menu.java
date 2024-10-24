@@ -105,8 +105,10 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarGrafoActionPerformed
-//        VisualizadorGrafo visualizador = new VisualizadorGrafo(grafoGestion.getGrafo());
-//        visualizador.mostrarGrafo();
+        System.setProperty("org.graphstream.ui", "swing");
+        GrafoVisualizador visualizador = new GrafoVisualizador(grafoGestion.getGrafo());
+        visualizador.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mostrarGrafoActionPerformed
 
     private void establecerTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_establecerTActionPerformed
@@ -134,8 +136,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void cargarRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRedActionPerformed
         grafoGestion.destruirGestor();
-        this.v1.setVisible(true);
-        this.setVisible(false);
+       CargarRed cargar = new CargarRed(new Bienvenido());
+        this.dispose();
     }//GEN-LAST:event_cargarRedActionPerformed
 
     /**
