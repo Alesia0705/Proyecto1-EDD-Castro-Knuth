@@ -47,9 +47,10 @@ public class DFSCobertura extends Cobertura {
         }
 
         // Inicializar el resultado
-        resultado.append("Calculando cobertura DFS desde la estación: ").append(estacionInicial.getNombre()).append("\n");
+        resultado.append("Calculando cobertura DFS desde la estación: ")
+                .append(estacionInicial.getNombre()).append("\n");
         ListaSimple visitadas = new ListaSimple();
-        
+
         // Iniciamos la búsqueda en profundidad
         dfsRecursivo(estacionInicial, visitadas, 0);
 
@@ -57,7 +58,7 @@ public class DFSCobertura extends Cobertura {
         JOptionPane.showMessageDialog(null, resultado.toString());
     }
 
-    // Método recursivo para realizar DFS
+    // Método recursivo para realizar DFS con soporte para pasos peatonales
     private void dfsRecursivo(Estacion estacion, ListaSimple visitadas, int distanciaActual) {
         // Marcamos la estación como visitada
         visitadas.InsertarFinal(estacion);
@@ -71,16 +72,25 @@ public class DFSCobertura extends Cobertura {
             return;
         }
 
-        // Obtenemos las estaciones adyacentes
+        // Obtener las estaciones conectadas peatonalmente y explorarlas primero (con t = 0)
+        ListaSimple peatonales = estacion.getPeaton();
+        for (int i = 0; i < peatonales.getSize(); i++) {
+            Estacion peatonal = (Estacion) peatonales.getValor(i);
+            // Si la estación peatonal no ha sido visitada, la exploramos
+            if (!visitadas.buscar(peatonal)) {
+                dfsRecursivo(peatonal, visitadas, distanciaActual); // Misma distancia porque es t = 0
+            }
+        }
+
+        // Obtenemos las estaciones adyacentes y las exploramos
         ListaSimple adyacentes = estacion.getListaAd();
         for (int i = 0; i < adyacentes.getSize(); i++) {
             Estacion adyacente = (Estacion) adyacentes.getValor(i);
 
-            // Si no ha sido visitada, la exploramos
+            // Si la estación adyacente no ha sido visitada, la exploramos
             if (!visitadas.buscar(adyacente)) {
-                dfsRecursivo(adyacente, visitadas, distanciaActual + 1);
+                dfsRecursivo(adyacente, visitadas, distanciaActual + 1); // Aumentamos la distancia
             }
         }
     }
-    
 }

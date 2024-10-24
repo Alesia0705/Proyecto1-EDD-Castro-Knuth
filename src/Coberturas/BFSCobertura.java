@@ -30,7 +30,8 @@ public class BFSCobertura extends Cobertura {
 
     /**
      * Método que calcula la cobertura BFS desde una estación inicial, recorriendo
-     * las estaciones adyacentes hasta una distancia máxima de t.
+     * las estaciones adyacentes hasta una distancia máxima de t, considerando también
+     * las conexiones peatonales con un costo de t = 0.
      * 
      * @param estacionInicial La estación desde la cual se comienza el cálculo de cobertura.
      */
@@ -41,7 +42,7 @@ public class BFSCobertura extends Cobertura {
             return;
         }
 
-        String resultado = "Calculando cobertura BFS desde la estación: " + estacionInicial.getNombre();
+        String resultado = "Calculando cobertura BFS desde la estación: " + estacionInicial.getNombre() + "\n";
 
         Cola cola = new Cola();  // Cola personalizada para realizar el BFS
         ListaSimple visitadas = new ListaSimple();  // Lista de estaciones ya visitadas
@@ -64,15 +65,28 @@ public class BFSCobertura extends Cobertura {
 
             resultado += "Estación actual: " + actual.getNombre() + " (Distancia: " + distanciaActual + ")" + "\n";
 
-            // Obtener las estaciones adyacentes de la estación actual
+            // Explorar primero los pasos peatonales, con t = 0
+            ListaSimple peatonales = actual.getPeaton();
+            for (int i = 0; i < peatonales.getSize(); i++) {
+                Estacion peatonal = (Estacion) peatonales.getValor(i);
+
+                // Si la estación peatonal no ha sido visitada, se encola sin aumentar la distancia
+                if (!visitadas.buscar(peatonal)) {
+                    cola.enColar(peatonal);
+                    visitadas.InsertarFinal(peatonal);
+                    distancias.enColar(distanciaActual);  // Misma distancia porque es t = 0
+                }
+            }
+
+            // Explorar las estaciones adyacentes de la estación actual
             ListaSimple adyacentes = actual.getListaAd();
             for (int i = 0; i < adyacentes.getSize(); i++) {
                 Estacion adyacente = (Estacion) adyacentes.getValor(i);
 
-                // Si la estación adyacente no ha sido visitada, se encola
+                // Si la estación adyacente no ha sido visitada, se encola con distancia incrementada
                 if (!visitadas.buscar(adyacente)) {
-                    cola.enColar(adyacente);  // Encolar la estación adyacente
-                    visitadas.InsertarFinal(adyacente);  // Marcar como visitada
+                    cola.enColar(adyacente);
+                    visitadas.InsertarFinal(adyacente);
                     distancias.enColar(distanciaActual + 1);  // Aumentar la distancia
                 }
             }
@@ -84,7 +98,8 @@ public class BFSCobertura extends Cobertura {
 
     /**
      * Método que marca las estaciones cubiertas desde una estación inicial hasta un máximo de t paradas,
-     * añadiendo las estaciones cubiertas a la lista proporcionada.
+     * añadiendo las estaciones cubiertas a la lista proporcionada. Considera también las conexiones peatonales
+     * como si fueran de distancia t = 0.
      * 
      * @param estacionInicial La estación desde donde se empieza a marcar la cobertura.
      * @param estacionesCubiertas Una lista de estaciones que serán marcadas como cubiertas.
@@ -111,6 +126,19 @@ public class BFSCobertura extends Cobertura {
                 continue;
             }
 
+            // Explorar primero los pasos peatonales, con t = 0
+            ListaSimple peatonales = actual.getPeaton();
+            for (int i = 0; i < peatonales.getSize(); i++) {
+                Estacion peatonal = (Estacion) peatonales.getValor(i);
+
+                // Si la estación peatonal no ha sido marcada como cubierta, la encolamos
+                if (!estacionesCubiertas.buscar(peatonal)) {
+                    cola.enColar(peatonal);
+                    estacionesCubiertas.InsertarFinal(peatonal);  // Marcar la estación como cubierta
+                    distancias.enColar(distanciaActual);  // Mantener la misma distancia porque es t = 0
+                }
+            }
+
             // Obtener estaciones adyacentes de la estación actual
             ListaSimple adyacentes = actual.getListaAd();
             for (int i = 0; i < adyacentes.getSize(); i++) {
@@ -126,3 +154,4 @@ public class BFSCobertura extends Cobertura {
         }
     }
 }
+

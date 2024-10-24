@@ -133,9 +133,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarLineasActionPerformed
 
     private void cargarRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRedActionPerformed
-//        grafoGestion.destruirGestor();
-//        this.v1.setVisible(true);
-//        this.setVisible(false);
+        grafoGestion.destruirGestor();
+        this.v1.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_cargarRedActionPerformed
 
     /**
